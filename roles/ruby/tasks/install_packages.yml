@@ -1,10 +1,13 @@
 ---
+- debug: msg={{ ansible_os_family }}
+- include_vars: "{{ ansible_os_family }}.yml"
+
 - name: ensure necessary yum packages are installed
   yum:
     name: "{{ item }}"
     state: present
   sudo: true
-  with_items: rvm.redhat_packages
+  with_items: rvm_dependency_packages
   when: ansible_os_family == "RedHat"
 
 - name: ensure necessary apt packages are installed
@@ -13,5 +16,5 @@
     state: present
     update_cache: yes
   sudo: true
-  with_items: rvm.debian_packages
+  with_items: rvm_dependency_packages
   when: ansible_os_family == "Debian"

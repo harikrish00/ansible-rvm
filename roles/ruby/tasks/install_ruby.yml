@@ -1,4 +1,4 @@
 ---
 - name: installing Ruby as user
-  command: "{{rvm_root}}/bin/rvm install {{ item }}"
+  command: "{{ rvm_root }}/bin/rvm install {{ item }}"
   with_items: "{{ ruby_versions }}"

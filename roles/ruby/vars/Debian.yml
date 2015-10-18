@@ -1,0 +1,1 @@
+rvm_dependency_packages: [curl, gnupg2, g++, libreadline6-dev, zlib1g-dev, libssl-dev, libyaml-dev, libsqlite3-dev, sqlite3, autoconf, libgdbm-dev, libncurses5-dev, automake, libtool, bison, pkg-config, libffi-dev, openjdk-7-jre-headless]
