@@ -1,0 +1,22 @@
+---
+- include: ./receive_key.yml
+
+- name: who
+  command: "whoami"
+  register: who
+
+- debug: var=who
+
+- name: Copy rvm_installer script
+  copy: src=rvm_installer dest="{{rvm_install_dir}}" mode=0755
+
+- name: installing RVM as user
+  command: "{{rvm_install_dir}}/rvm_installer --path {{rvm_root}} stable"
+
+- name: removing RVM installer
+  file:
+    path: "{{rvm_install_dir}}/rvm_installer"
+    state: absent
+
+- name: setting RVM autolibs on as user
+  command: "{{rvm_root}}/bin/rvm autolibs read-fail"

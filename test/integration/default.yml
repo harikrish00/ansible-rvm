@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  remote_user: root
+  roles:
+    - jenkins
+
+- hosts: localhost
+  remote_user: root
+  become_user: jenkins
+  roles:
+    - ruby

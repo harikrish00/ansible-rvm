@@ -1,0 +1,20 @@
+---
+# Install gpg public key as a regular user
+
+- name: Check for mpapis gpg key as user
+  shell: gpg --list-keys mpapis
+  register: mpapis_gpg_key_exists
+  ignore_errors: true
+
+- name: Copy mpapis gpg key
+  copy: src=mpapis.asc dest="{{rvm_install_dir}}" mode=0644
+  when: mpapis_gpg_key_exists is defined and mpapis_gpg_key_exists.rc is defined and mpapis_gpg_key_exists.rc != 0
+
+- name: receiving key as user
+  shell: "gpg --import {{ rvm_install_dir }}/mpapis.asc"
+  when: mpapis_gpg_key_exists is defined and mpapis_gpg_key_exists.rc is defined and mpapis_gpg_key_exists.rc != 0
+
+- name: removing key as user
+  file:
+    path: "{{ rvm_install_dir }}/mpapis.asc"
+    state: absent

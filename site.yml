@@ -1,0 +1,15 @@
+---
+- hosts: default
+  #remote_user: root
+  sudo: no
+
+  roles:
+    - jenkins
+
+- hosts: default
+ # remote_user: jenkins
+  #become_user: jenkins
+  #become: yes
+
+  roles:
+    - { role: ruby }

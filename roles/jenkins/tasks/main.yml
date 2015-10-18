@@ -1,0 +1,12 @@
+- user: name=jenkins shell=/bin/bash groups=wheel append=yes
+  sudo: yes
+  when: ansible_os_family=='RedHat'
+
+- user: name=jenkins shell=/bin/bash
+  sudo: yes
+  when: ansible_os_family=='Debian'
+
+- name: Copy jenkins sudoers file
+  sudo: yes
+  copy: src=jenkins dest="/etc/sudoers.d/" mode=0640
+  when: ansible_os_family=='Debian'

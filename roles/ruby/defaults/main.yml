@@ -1,0 +1,14 @@
+---
+rvm:
+  # the packages which need for download rvm
+  debian_packages: [curl, gnupg2, g++, libreadline6-dev, zlib1g-dev, libssl-dev, libyaml-dev, libsqlite3-dev, sqlite3, autoconf, libgdbm-dev, libncurses5-dev, automake, libtool, bison, pkg-config, libffi-dev, openjdk-7-jre-headless]
+
+  redhat_packages: [curl, gnupg2, patch, libyaml-devel, autoconf, gcc-c++, patch, readline-devel, zlib-devel, libffi-devel, openssl-devel, automake, libtool, bison, sqlite-devel, java-1.7.0-openjdk]
+
+rvm_user: jenkins
+rvm_auto_update_rvm: true
+rvm_install_dir: "/home/jenkins"
+rvm_root: "/home/jenkins/.rvm"
+rvm_init_script: "{{ rvm_install_dir }}/.rvm/scripts/rvm"
+rvm_default_ruby_version: ruby-2.2.3
+ruby_versions: [ ruby-2.2.1, ruby-2.2.2, ruby-2.2.3, jruby-1.7.22 ]
