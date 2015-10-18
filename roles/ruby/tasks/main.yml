@@ -1,37 +1,27 @@
 ---
-- include: ./install_packages.yml
-
-- debug: var="{{ rvm_install_dir }}"
-#- name: Set PATH in .bashrc
-#  #become: yes
-#  #become_user: jenkins
-#  lineinfile:
-#    dest: ~/.bashrc
-#    line: PATH="usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
-#    state: present
-#    insertafter: EOF
+- include: install_packages.yml
 
 - name: checking that RVM is installed
-  stat:
-    path: "{{rvm_init_script}}"
+  stat: 
+    path: "{{ rvm_init_script }}"
   ignore_errors: True
   sudo: true
   register: rvm_install_result
 
-- include: ./install_rvm.yml
-  when: rvm_install_result.stat.exists != true
+- include: install_rvm.yml
+  when: rvm_install_result.stat.exists == False
   become: yes
-  become_user: "{{rvm_user}}"
+  become_user: "{{ rvm_user }}"
 
-- include: ./update_rvm.yml
+- include: update_rvm.yml
   when: rvm_auto_update_rvm and rvm_install_result.stat.exists == true
   become: yes
-  become_user: "{{rvm_user}}"
+  become_user: "{{ rvm_user }}"
 
-- include: ./install_ruby.yml
+- include: install_ruby.yml
   become: yes
-  become_user: "{{rvm_user}}"
+  become_user: "{{ rvm_user }}"
 
-- include: ./select_ruby.yml
+- include: select_ruby.yml
   become: yes
-  become_user: "{{rvm_user}}"
+  become_user: "{{ rvm_user }}"

@@ -7,7 +7,7 @@
   ignore_errors: true
 
 - name: Copy mpapis gpg key
-  copy: src=mpapis.asc dest="{{rvm_install_dir}}" mode=0644
+  copy: src=mpapis.asc dest="{{ rvm_install_dir }}" mode=0644
   when: mpapis_gpg_key_exists is defined and mpapis_gpg_key_exists.rc is defined and mpapis_gpg_key_exists.rc != 0
 
 - name: receiving key as user
